@@ -42,8 +42,8 @@
     <range-slider
       :value="exponent"
       @input="changeExponent($event)"
-      @mouseup.native="onSlideEnd"
-      @touchend.native="onSlideEnd"
+      @mouseup.native="updateQuery"
+      @touchend.native="updateQuery"
       :max="expoMax"
       :step="0.00000001"
     ></range-slider>
@@ -90,7 +90,7 @@ export default {
       'cycleAction',
       'changeExponent'
     ]),
-    onSlideEnd () {
+    updateQuery () {
       this.$router.replace({query: this.query})
     }
   }
