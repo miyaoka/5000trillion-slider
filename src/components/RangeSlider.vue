@@ -3,7 +3,6 @@
     class="range-slider"
     type="range"
     :value="value"
-    @input="$emit('input', Number($event.target.value))"
     :min="0"
     :max="max"
     :step="step"

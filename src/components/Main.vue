@@ -41,7 +41,7 @@
     </div>
     <range-slider
       :value="exponent"
-      @input="changeExponent($event)"
+      @input.native="changeExponent($event.target.value)"
       @mouseup.native="updateQuery"
       @touchend.native="updateQuery"
       :max="expoMax"
