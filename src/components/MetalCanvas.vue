@@ -1,5 +1,6 @@
 <template>
-  <canvas v-draw="{text, fontLoaded}">
+  <canvas
+    v-draw="{text, fontLoaded}">
   </canvas>
 </template>
 
@@ -11,6 +12,9 @@ export default {
   },
   directives: {
     draw (el, binding) {
+      if (!binding.value.fontLoaded) {
+        return
+      }
       const ctx = el.getContext('2d')
       const text = binding.value.text
       const scale = 1
@@ -25,7 +29,7 @@ export default {
       ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.clearRect(0, 0, el.width, el.height)
       ctx.setTransform(1 * scale, 0, -0.4 * scale, 1 * scale, 0, 0)
-//      ctx.scale(2, 2)
+
       // 黒色
       ctx.strokeStyle = '#000'
       ctx.lineWidth = 22

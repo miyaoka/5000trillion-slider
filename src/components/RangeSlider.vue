@@ -28,11 +28,11 @@ export default {
   --thumb-size: 100px;
   --thumb-radius: 50%;
   --track-height: 50px;
-  --track-color: #ffcccc;
+  --track-color: #ffffcc;
 
   @media (min-width: 960px) {
-    --thumb-size: 50px;
-    --track-height: 20px;
+    --thumb-size: 20px;
+    --track-height: 10px;
   }
 
   -webkit-appearance: none;
@@ -124,8 +124,5 @@ export default {
   }
 
 }
-
-
-
 
 </style>
