@@ -16,7 +16,7 @@
 
 
     <div
-      @click="cycleCurrency"
+      @click="cycleCurrency() + updateQuery()"
     >
       <metal-canvas
         :text="price"
@@ -28,7 +28,7 @@
       </metal-canvas>
     </div>
     <div
-      @click="cycleAction"
+      @click="cycleAction() + updateQuery()"
     >
       <metal-canvas
         :text="action"
