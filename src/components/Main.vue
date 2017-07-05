@@ -19,7 +19,7 @@
       <metal-canvas
         :text="action"
         :fontLoaded="fontLoaded"
-        class="price"
+        class="action"
         :width="Math.max(1560, action.length * 260) + 'px'"
         height="300px"
         :colors="actionColor"
@@ -158,7 +158,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -173,7 +173,9 @@ export default {
 	src: url('../assets/font/notobk-subset.otf') format('opentype');
 }
 
-.price {
+.price,
+.action {
+  width: 100%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
