@@ -26,14 +26,18 @@
       >
       </metal-canvas>
     </div>
-    <range-slider
-      :value="exponent"
-      @input.native="updateExponent"
-      @mouseup.native="updateQuery"
-      @touchend.native="updateQuery"
-      :max="expoMax"
-      :step="0.00000001"
-    ></range-slider>
+    <div
+      class="slider"
+    >
+      <range-slider
+        :value="exponent"
+        @input.native="updateExponent"
+        @mouseup.native="updateQuery"
+        @touchend.native="updateQuery"
+        :max="expoMax"
+        :step="0.00000001"
+      ></range-slider>
+    </div>
   </div>
 </template>
 
@@ -180,6 +184,9 @@ export default {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+.slider {
+  margin: 40px 10px;
 }
 
 </style>
