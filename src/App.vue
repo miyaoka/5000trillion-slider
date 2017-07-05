@@ -22,4 +22,11 @@ html,
 body {
   margin: 0;
 }
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
 </style>

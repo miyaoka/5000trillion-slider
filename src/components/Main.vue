@@ -4,6 +4,7 @@
       @click="cycleCurrency() + updateQuery()"
     >
       <metal-canvas
+        ref="price"
         :text="price"
         :fontLoaded="fontLoaded"
         class="price"
@@ -17,6 +18,7 @@
       @click="cycleAction() + updateQuery()"
     >
       <metal-canvas
+        ref="action"
         :text="action"
         :fontLoaded="fontLoaded"
         class="action"
@@ -38,6 +40,13 @@
         :step="0.00000001"
       ></range-slider>
     </div>
+
+    <button
+      @click="saveImage"
+      class="saveBtn"
+    >
+      保存
+    </button>
   </div>
 </template>
 
@@ -157,7 +166,20 @@ export default {
     },
     updateExponent: debounce(function (e) {
       this.changeExponent(e.target.value)
-    }, 15)
+    }, 15),
+    saveImage () {
+      const buffer = document.createElement('canvas')
+      buffer.width = 1560
+      buffer.height = 600
+      const bc = buffer.getContext('2d')
+      bc.drawImage(this.$refs.price.$el, 0, 0)
+      bc.drawImage(this.$refs.action.$el, 0, 300)
+
+      const link = document.createElement('a')
+      link.download = `${this.price}${this.action}.png`
+      link.href = buffer.toDataURL('image/png')
+      link.click()
+    }
   }
 }
 </script>
@@ -189,4 +211,21 @@ export default {
   margin: 40px 10px;
 }
 
+.saveBtn {
+  font-size: 20px;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+}
+
+.saveBtn:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
 </style>
