@@ -32,8 +32,8 @@ export default {
 
       const ctx = el.getContext('2d')
       const text = binding.value.text
-      const scale = 1
-      const posx = el.width * 0.5 / scale
+      const scale = 2.4
+      const posx = el.width * 0.54 / scale
       const posy = 100
       let grad
 

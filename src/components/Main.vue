@@ -7,8 +7,8 @@
         :text="price"
         :fontLoaded="fontLoaded"
         class="price"
-        width="600px"
-        height="140px"
+        width="1280px"
+        height="300px"
         :colors="priceColor"
       >
       </metal-canvas>
@@ -20,8 +20,8 @@
         :text="action"
         :fontLoaded="fontLoaded"
         class="price"
-        width="600px"
-        height="140px"
+        :width="Math.max(1560, action.length * 260) + 'px'"
+        height="300px"
         :colors="actionColor"
       >
       </metal-canvas>
