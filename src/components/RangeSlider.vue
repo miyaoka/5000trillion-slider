@@ -24,14 +24,14 @@ export default {
 <style lang="postcss" scoped>
 .range-slider {
 
-  --thumb-size: 100px;
+  --thumb-size: 60px;
   --thumb-radius: 50%;
-  --track-height: 50px;
+  --track-height: 30px;
   --track-color: #ffffcc;
 
   @media (min-width: 960px) {
-    --thumb-size: 20px;
-    --track-height: 10px;
+    --thumb-size: 60px;
+    --track-height: 30px;
   }
 
   -webkit-appearance: none;
