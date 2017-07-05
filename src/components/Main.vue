@@ -41,7 +41,7 @@
     </div>
     <range-slider
       :value="exponent"
-      @input.native="changeExponent($event.target.value)"
+      @input.native="updateExponent"
       @mouseup.native="updateQuery"
       @touchend.native="updateQuery"
       :max="expoMax"
@@ -53,6 +53,7 @@
 <script>
 import FontFaceObserver from 'fontfaceobserver'
 import { mapGetters, mapActions } from 'vuex'
+import debounce from 'debounce'
 
 import RangeSlider from '@/components/RangeSlider'
 import MetalCanvas from '@/components/MetalCanvas'
@@ -92,7 +93,10 @@ export default {
     ]),
     updateQuery () {
       this.$router.replace({query: this.query})
-    }
+    },
+    updateExponent: debounce(function (e) {
+      this.changeExponent(e.target.value)
+    }, 15)
   }
 }
 </script>
