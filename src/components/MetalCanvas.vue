@@ -5,6 +5,13 @@
 </template>
 
 <script>
+const hsl = (h, s, l) => `hsl(${h}, ${s}%, ${l}%)`
+const addColorStops = (grad, list) => {
+  list.forEach(c => {
+    grad.addColorStop(c[0], hsl(...c[1]))
+  })
+}
+
 export default {
   props: {
     text: String,
@@ -37,16 +44,18 @@ export default {
 
       // 銀色
       grad = ctx.createLinearGradient(0, 24, 0, 122)
-      grad.addColorStop(0.0, 'rgb(0,15,36)')
-      grad.addColorStop(0.10, 'rgb(255,255,255)')
-      grad.addColorStop(0.18, 'rgb(55,58,59)')
-      grad.addColorStop(0.25, 'rgb(55,58,59)')
-      grad.addColorStop(0.5, 'rgb(200,200,200)')
-      grad.addColorStop(0.75, 'rgb(55,58,59)')
-      grad.addColorStop(0.85, 'rgb(25,20,31)')
-      grad.addColorStop(0.91, 'rgb(240,240,240)')
-      grad.addColorStop(0.95, 'rgb(166,175,194)')
-      grad.addColorStop(1, 'rgb(50,50,50)')
+      addColorStops(grad, [
+        [0.0, [215, 100, 7.1]],
+        [0.10, [0, 0, 100]],
+        [0.18, [195, 3.5, 22.4]],
+        [0.25, [195, 3.5, 22.4]],
+        [0.5, [0, 0, 78.4]],
+        [0.75, [195, 3.5, 22.4]],
+        [0.85, [267, 21.6, 10.0]],
+        [0.91, [0, 0, 94.1]],
+        [0.95, [221, 18.7, 70.6]],
+        [1, [0, 0, 19.6]]
+      ])
       ctx.strokeStyle = grad
       ctx.lineWidth = 20
       ctx.strokeText(text, posx + 4, posy + 4)
@@ -58,12 +67,14 @@ export default {
 
       // 金色
       grad = ctx.createLinearGradient(0, 20, 0, 100)
-      grad.addColorStop(0, 'rgb(253,241,0)')
-      grad.addColorStop(0.25, 'rgb(245,253,187)')
-      grad.addColorStop(0.4, 'rgb(255,255,255)')
-      grad.addColorStop(0.75, 'rgb(253,219,9)')
-      grad.addColorStop(0.9, 'rgb(127,53,0)')
-      grad.addColorStop(1, 'rgb(243,196,11)')
+      addColorStops(grad, [
+        [0, [57, 100, 49.6]],
+        [0.25, [67, 94.3, 86.3]],
+        [0.4, [0, 0, 100]],
+        [0.75, [52, 98.4, 51.4]],
+        [0.9, [25, 100, 24.9]],
+        [1, [48, 91.3, 49.8]]
+      ])
       ctx.strokeStyle = grad
       ctx.lineWidth = 10
       ctx.strokeText(text, posx, posy)
@@ -80,20 +91,24 @@ export default {
 
       // 赤
       grad = ctx.createLinearGradient(0, 20, 0, 100)
-      grad.addColorStop(0, 'rgb(255, 100, 0)')
-      grad.addColorStop(0.5, 'rgb(123, 0, 0)')
-      grad.addColorStop(0.51, 'rgb(240, 0, 0)')
-      grad.addColorStop(1, 'rgb(5, 0, 0)')
+      addColorStops(grad, [
+        [0, [24, 100, 50]],
+        [0.5, [0, 100, 24.1]],
+        [0.51, [0, 100, 47.1]],
+        [1, [0, 100, 1]]
+      ])
       ctx.lineWidth = 4
       ctx.strokeStyle = grad
       ctx.strokeText(text, posx, posy - 3)
 
       // 赤
       grad = ctx.createLinearGradient(0, 20, 0, 100)
-      grad.addColorStop(0, 'rgb(230, 0, 0)')
-      grad.addColorStop(0.5, 'rgb(123, 0, 0)')
-      grad.addColorStop(0.51, 'rgb(240, 0, 0)')
-      grad.addColorStop(1, 'rgb(5, 0, 0)')
+      addColorStops(grad, [
+        [0, [0, 100, 45.1]],
+        [0.5, [0, 100, 24.1]],
+        [0.51, [0, 100, 47.1]],
+        [1, [0, 100, 1]]
+      ])
       ctx.fillStyle = grad
       ctx.fillText(text, posx, posy - 3)
     }
