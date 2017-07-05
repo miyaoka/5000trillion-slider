@@ -1,21 +1,6 @@
 <template>
   <div id="app">
     <div
-      @click="cycleCurrency"
-    >
-      {{price}}
-    </div>
-    <div
-      @click="cycleAction"
-    >
-      {{action}}
-    </div>
-    <div>
-      {{priceValue}}
-    </div>
-
-
-    <div
       @click="cycleCurrency() + updateQuery()"
     >
       <metal-canvas
