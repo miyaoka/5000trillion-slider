@@ -5,8 +5,8 @@
     >
       <metal-canvas
         ref="price"
+        :font="'NotoSansCJK-JP-miyaoka'"
         :text="price"
-        :fontLoaded="fontLoaded"
         class="price"
         width="1280px"
         height="300px"
@@ -19,8 +19,8 @@
     >
       <metal-canvas
         ref="action"
+        :font="'NotoSerifCJK-JP-miyaoka'"
         :text="action"
-        :fontLoaded="fontLoaded"
         class="action"
         :width="Math.max(1560, action.length * 260) + 'px'"
         height="300px"
@@ -51,28 +51,19 @@
 </template>
 
 <script>
-import FontFaceObserver from 'fontfaceobserver'
 import { mapGetters, mapActions } from 'vuex'
 import debounce from 'debounce'
 
 import RangeSlider from '@/components/RangeSlider'
 import MetalCanvas from '@/components/MetalCanvas'
 
-const font = new FontFaceObserver('notobk-subset')
-
 export default {
-  created () {
-    font.load().then(() => {
-      this.fontLoaded = true
-    })
-  },
   components: {
     RangeSlider,
     MetalCanvas
   },
   data () {
     return {
-      fontLoaded: false,
       priceColor: {
         front: [
           [0, [0, 100, 45]],
@@ -195,8 +186,13 @@ export default {
 }
 
 @font-face {
-	font-family: 'notobk-subset';
-	src: url('../assets/font/notobk-subset.otf') format('opentype');
+	font-family: 'NotoSansCJK-JP-miyaoka';
+	src: url('../assets/font/NotoSansCJKjp-Bold-miyaoka.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'NotoSerifCJK-JP-miyaoka';
+	src: url('../assets/font/NotoSerifCJKjp-Bold-miyaoka.otf') format('opentype');
 }
 
 .price,

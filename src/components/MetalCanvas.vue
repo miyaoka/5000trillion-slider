@@ -1,21 +1,30 @@
 <template>
-  <canvas
-    v-draw="{text, fontLoaded, colors}">
-  </canvas>
+  <canvas></canvas>
 </template>
 
 <script>
+import FontFaceObserver from 'fontfaceobserver'
+
 const hsl = (h, s, l) => `hsl(${h}, ${s}%, ${l}%)`
 const addColorStops = (grad, list) => {
   list.forEach(c => {
     grad.addColorStop(c[0], hsl(...c[1]))
   })
+  return grad
 }
 
 export default {
+  mounted () {
+    new FontFaceObserver(this.font)
+    .load()
+    .then(() => {
+      this.draw()
+      this.$watch('text', this.draw)
+    })
+  },
   props: {
     text: String,
-    fontLoaded: Boolean,
+    font: String,
     colors: {
       front: Array,
       frontEdge: Array,
@@ -23,21 +32,15 @@ export default {
       side: Array
     }
   },
-  directives: {
-    draw (el, binding) {
-      if (!binding.value.fontLoaded) {
-        return
-      }
-      const colors = binding.value.colors
-
+  methods: {
+    draw () {
+      const el = this.$el
       const ctx = el.getContext('2d')
-      const text = binding.value.text
       const scale = 2.4
       const posx = el.width * 0.54 / scale
       const posy = 100
-      let grad
 
-      ctx.font = '100px notobk-subset'
+      ctx.font = `100px ${this.font}`
       ctx.lineJoin = 'round'
       ctx.textAlign = 'center'
 
@@ -48,49 +51,53 @@ export default {
       // 黒色
       ctx.strokeStyle = '#000'
       ctx.lineWidth = 22
-      ctx.strokeText(text, posx + 4, posy + 4)
+      ctx.strokeText(this.text, posx + 4, posy + 4)
 
       // 銀色
-      grad = ctx.createLinearGradient(0, 24, 0, 112)
-      addColorStops(grad, colors.side)
-      ctx.strokeStyle = grad
       ctx.lineWidth = 20
-      ctx.strokeText(text, posx + 3, posy + 3)
+      ctx.strokeStyle = addColorStops(
+        ctx.createLinearGradient(0, 24, 0, 112),
+        this.colors.side
+      )
+      ctx.strokeText(this.text, posx + 3, posy + 3)
 
       // 黒色
       ctx.strokeStyle = '#000000'
       ctx.lineWidth = 16
-      ctx.strokeText(text, posx, posy)
+      ctx.strokeText(this.text, posx, posy)
 
       // 金色
-      grad = ctx.createLinearGradient(0, 20, 0, 100)
-      addColorStops(grad, colors.frontBase)
-      ctx.strokeStyle = grad
       ctx.lineWidth = 11
-      ctx.strokeText(text, posx + 1, posy - 2)
+      ctx.strokeStyle = addColorStops(
+        ctx.createLinearGradient(0, 20, 0, 100),
+        this.colors.frontBase
+      )
+      ctx.strokeText(this.text, posx + 1, posy - 2)
 
       // 黒
       ctx.lineWidth = 6
       ctx.strokeStyle = '#000'
-      ctx.strokeText(text, posx + 2, posy - 3)
+      ctx.strokeText(this.text, posx + 2, posy - 3)
 
       // 白
       ctx.lineWidth = 5
       ctx.strokeStyle = '#FFFFFF'
-      ctx.strokeText(text, posx, posy - 3)
+      ctx.strokeText(this.text, posx, posy - 3)
 
       // 赤
-      grad = ctx.createLinearGradient(0, 20, 0, 100)
-      addColorStops(grad, colors.frontEdge)
       ctx.lineWidth = 2.5
-      ctx.strokeStyle = grad
-      ctx.strokeText(text, posx, posy - 3)
+      ctx.strokeStyle = addColorStops(
+        ctx.createLinearGradient(0, 20, 0, 100),
+        this.colors.frontEdge
+      )
+      ctx.strokeText(this.text, posx, posy - 3)
 
       // 赤
-      grad = ctx.createLinearGradient(0, 20, 0, 100)
-      addColorStops(grad, colors.front)
-      ctx.fillStyle = grad
-      ctx.fillText(text, posx, posy - 3)
+      ctx.fillStyle = addColorStops(
+        ctx.createLinearGradient(0, 20, 0, 100),
+        this.colors.front
+      )
+      ctx.fillText(this.text, posx, posy - 3)
     }
   }
 }
