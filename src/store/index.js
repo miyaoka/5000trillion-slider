@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import actionList from './actionList.yml'
+
 Vue.use(Vuex)
 
 const state = {
@@ -15,26 +17,6 @@ const max = 5000000000000000
 
 const baseList = '万億兆京垓'
 const currencyList = '円㌦㌣㌷㍀㌠㌆㌵㌡㍓㍔'
-const actionList = [
-  '欲しい!',
-  '欲しくない!',
-  'あげる!',
-  'になります',
-  '所望!',
-  'だよね!',
-  'ください!',
-  'GET!',
-  'だと…?',
-  'なのか?',
-  'よこせ',
-  'とは?',
-  'を追え!',
-  'の謎',
-  'になりたい',
-  'を求めて',
-  'なんて要らない',
-  'が好き'
-]
 
 const nextInList = (list, val) => list[(list.indexOf(val) + 1) % list.length]
 

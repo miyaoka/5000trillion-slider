@@ -61,6 +61,13 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.ya?ml$/,
+        loader: [
+          'json-loader',
+          'yaml-loader',
+        ]
       }
     ]
   }
