@@ -54,6 +54,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import debounce from 'debounce'
 import MetalColors from './MetalColors'
+import trimCanvas from '@/utils/trimCanvas'
 
 import RangeSlider from '@/components/RangeSlider'
 import MetalCanvas from '@/components/MetalCanvas'
@@ -91,17 +92,28 @@ export default {
     updateExponent: debounce(function (e) {
       this.changeExponent(e.target.value)
     }, 15),
-    saveImage () {
+    combineImage () {
+      const canvasList = [
+        this.$refs.price.$el,
+        this.$refs.action.$el
+      ]
       const buffer = document.createElement('canvas')
-      buffer.width = 1560
-      buffer.height = 600
-      const bc = buffer.getContext('2d')
-      bc.drawImage(this.$refs.price.$el, 0, 0)
-      bc.drawImage(this.$refs.action.$el, 0, 300)
+      const bufferCtx = buffer.getContext('2d')
+      buffer.width = Math.min(...canvasList.map(el => el.width))
+      buffer.height = canvasList.map(el => el.height).reduce((a, b) => a + b)
 
+      let y = 0
+      canvasList.forEach(el => {
+        const h = el.height * buffer.width / el.width
+        bufferCtx.drawImage(el, 0, y, buffer.width, h)
+        y += h
+      })
+      return trimCanvas(buffer)
+    },
+    saveImage () {
       const link = document.createElement('a')
+      link.href = this.combineImage().toDataURL('image/png')
       link.download = `${this.price}${this.action}.png`
-      link.href = buffer.toDataURL('image/png')
       link.click()
     }
   }
