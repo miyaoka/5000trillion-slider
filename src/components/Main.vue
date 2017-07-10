@@ -41,12 +41,22 @@
       ></range-slider>
     </div>
 
-    <button
-      @click="saveImage"
-      class="saveBtn"
-    >
-      保存
-    </button>
+
+    <div>
+      <md-button
+        class="md-raised md-primary"
+        @click="saveImage"
+      ><md-icon class="icon-arrow-down-circle"></md-icon> 画像保存</md-button>
+      <md-button
+        class="md-raised md-accent"
+        @click="tweet"
+      ><md-icon class="icon-social-twitter"></md-icon> ツイートする</md-button>
+    </div>
+    <md-button
+      href="https://github.com/miyaoka/5000trillion-slider"
+      target="_blank"
+    ><md-icon class="icon-info"></md-icon> info</md-button>
+
   </div>
 </template>
 
