@@ -127,6 +127,22 @@ export default {
       link.href = this.combineImage().toDataURL('image/png')
       link.download = `${this.price}${this.action}.png`
       link.click()
+    },
+    tweet () {
+      const link = document.createElement('a')
+
+      link.href = [
+        'https://twitter.com/intent/tweet',
+        Object.entries({
+          url: window.location.href,
+          text: this.price + this.action
+        })
+        .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+        .join('&')
+      ].join('?')
+      link.setAttribute('target', '_blank')
+
+      link.click()
     }
   }
 }
