@@ -52,12 +52,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import debounce from 'debounce'
+import { throttle } from 'lodash'
 import MetalColors from './MetalColors'
 import trimCanvas from '@/utils/trimCanvas'
 
 import RangeSlider from '@/components/RangeSlider'
 import MetalCanvas from '@/components/MetalCanvas'
+
+const updateSliderSpan = 50
 
 export default {
   components: {
@@ -89,9 +91,9 @@ export default {
     updateQuery () {
       this.$router.replace({query: this.query})
     },
-    updateExponent: debounce(function (e) {
+    updateExponent: throttle(function (e) {
       this.changeExponent(e.target.value)
-    }, 15),
+    }, updateSliderSpan),
     combineImage () {
       const canvasList = [
         this.$refs.price.$el,
