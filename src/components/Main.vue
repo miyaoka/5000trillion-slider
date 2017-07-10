@@ -23,7 +23,7 @@
         :text="action"
         class="action"
         :width="Math.max(1560, action.length * 260) + 'px'"
-        height="300px"
+        height="350px"
         :colors="actionColor"
       >
       </metal-canvas>
