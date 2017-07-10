@@ -155,7 +155,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 @font-face {
@@ -177,7 +177,7 @@ export default {
   display: block;
 }
 .slider {
-  margin: 40px 10px;
+  margin: 40px 10px 20px;
 }
 
 .saveBtn {
