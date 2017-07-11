@@ -135,7 +135,8 @@ export default {
         'https://twitter.com/intent/tweet',
         Object.entries({
           url: window.location.href,
-          text: this.price + this.action
+          text: this.price + this.action + ' |',
+          hashtags: '5000cho-slider'
         })
         .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
         .join('&')
