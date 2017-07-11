@@ -1,4 +1,4 @@
-export default (canvas) => {
+export default (canvas, padding) => {
   const ctx = canvas.getContext('2d')
   const copy = document.createElement('canvas').getContext('2d')
 
@@ -8,9 +8,9 @@ export default (canvas) => {
   const trimWidth = bounds.right - bounds.left
   const trimmed = ctx.getImageData(bounds.left, bounds.top, trimWidth, trimHeight)
 
-  copy.canvas.width = trimWidth
-  copy.canvas.height = trimHeight
-  copy.putImageData(trimmed, 0, 0)
+  copy.canvas.width = trimWidth + padding * 2
+  copy.canvas.height = trimHeight + padding * 2
+  copy.putImageData(trimmed, padding, padding)
 
   return copy.canvas
 }

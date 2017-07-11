@@ -75,6 +75,7 @@ import RangeSlider from '@/components/RangeSlider'
 import MetalCanvas from '@/components/MetalCanvas'
 
 const updateSliderSpan = 50
+const trimmedCanvasPadding = 60
 
 export default {
   components: {
@@ -126,7 +127,7 @@ export default {
         bufferCtx.drawImage(el, 0, y, buffer.width, h)
         y += h
       })
-      return trimCanvas(buffer)
+      return trimCanvas(buffer, trimmedCanvasPadding)
     },
     saveImage () {
       const link = document.createElement('a')
