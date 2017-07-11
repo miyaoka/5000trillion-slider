@@ -5,12 +5,13 @@ import actionList from './actionList.yml'
 
 Vue.use(Vuex)
 
-const state = {
+const initialState = {
   priceNumber: 1,
   priceName: '万',
   currency: '円',
   action: '欲しい!'
 }
+const state = Object.assign({}, initialState)
 
 const base = 10000
 const max = 5000000000000000
@@ -36,6 +37,7 @@ const getters = {
 }
 
 const mutations = {
+  reset: (state) => { Object.assign(state, initialState) },
   cycleCurrency: (state) => { state.currency = nextInList(currencyList, state.currency) },
   cycleAction: (state) => { state.action = nextInList(actionList, state.action) },
   parseQuery: (state, query) => {
@@ -58,6 +60,7 @@ const mutations = {
 }
 
 const actions = {
+  reset: ({ commit }) => { commit('reset') },
   cycleCurrency: ({ commit }) => { commit('cycleCurrency') },
   cycleAction: ({ commit }) => { commit('cycleAction') },
   parseQuery: ({ commit }, query) => { commit('parseQuery', query) },

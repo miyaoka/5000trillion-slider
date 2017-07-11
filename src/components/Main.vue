@@ -42,6 +42,11 @@
     </div>
 
 
+    <md-button
+      class="md-raised"
+      @click="reset() + updateQuery(false)"
+    ><md-icon class="icon-refresh"></md-icon> リセット</md-button>
+
     <div>
       <md-button
         class="md-raised md-primary"
@@ -94,12 +99,13 @@ export default {
   },
   methods: {
     ...mapActions([
+      'reset',
       'cycleCurrency',
       'cycleAction',
       'changeExponent'
     ]),
-    updateQuery () {
-      this.$router.replace({query: this.query})
+    updateQuery (setQuery = true) {
+      this.$router.replace(setQuery ? {query: this.query} : {})
     },
     updateExponent: throttle(function (e) {
       this.changeExponent(e.target.value)
