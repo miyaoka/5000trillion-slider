@@ -143,7 +143,7 @@ export default {
         Object.entries({
           url: window.location.href,
           text: this.price + this.action + ' |',
-          hashtags: '5000cho-slider'
+          hashtags: '5000cho_slider'
         })
         .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
         .join('&')
